@@ -6,6 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Controle extends javax.swing.JFrame {
     public Controle() {
         initComponents();
+        funcionarios.add(new TecnicoAdministrativo(0, "Jener de Souza Novais", 0, true, new Chefe()));
     }
 
     @SuppressWarnings("unchecked")
@@ -27,13 +28,13 @@ public class Controle extends javax.swing.JFrame {
         cadastroButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         nomeComboBox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        consultarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,17 +118,22 @@ public class Controle extends javax.swing.JFrame {
 
         jLabel5.setText("Buscar por:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chefes", "Subordinados" }));
-
         jLabel6.setText("Nome Funcionário Público:");
 
         jLabel7.setText("Visualização do Resultado:");
 
-        jButton3.setText("Consultar");
+        consultarButton.setText("Consultar");
+        consultarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarButtonActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chefes", "Subordinados" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,11 +149,10 @@ public class Controle extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox3, 0, 213, Short.MAX_VALUE)
-                                .addComponent(nomeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nomeComboBox, 0, 213, Short.MAX_VALUE)
+                            .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(392, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -160,11 +165,11 @@ public class Controle extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(109, 109, 109)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(jButton3))
+                    .addComponent(consultarButton))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -186,17 +191,31 @@ public class Controle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ArrayList<String> chefes = new ArrayList<>();
+    ArrayList<String> chefes = new ArrayList<String>();
+    ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+    
     ArrayList<Professor> professores = new ArrayList<Professor>();
     ArrayList<TecnicoAdministrativo> tecAdms = new ArrayList<TecnicoAdministrativo>();
-    
-//    
+  
+    public void atualizarComboBoxes() {
+        chefeComboBox.removeAllItems();
+        chefeComboBox.addItem("Jener de Souza Novais");
+        for(int i = 0; i < chefes.size(); i++) {
+            chefeComboBox.addItem(chefes.get(i));
+        }
+        
+        nomeComboBox.removeAllItems();
+        for(int i = 0; i < funcionarios.size(); i++) {
+            nomeComboBox.addItem(funcionarios.get(i).nome);
+        }
+    }
     
     private void cadastroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroButtonActionPerformed
+        int id = funcionarios.size();
         String nome = funcTextField.getText();;
-        String chefe = chefeComboBox.getSelectedItem().toString();
+        int chefeID = chefeComboBox.getSelectedIndex();
         boolean habilitacaoChefe;
-        String funcao;
+        int idDoChefeDoChefe = 0;
 
         if(habComboBox.getSelectedIndex() == 1) {
             habilitacaoChefe = true;
@@ -204,8 +223,7 @@ public class Controle extends javax.swing.JFrame {
             habilitacaoChefe = false;
         }
         
-        if(funcTextField.getText() == "" ){
-            System.out.println("entrou");
+        if(funcTextField.getText() == ""){
             return;
         }
         
@@ -214,29 +232,98 @@ public class Controle extends javax.swing.JFrame {
         }
         
         if(tecAdmRadio.isSelected()) {
-            funcao = tecAdmRadio.getText();
+            TecnicoAdministrativo tecAdm;
             
-            tecAdms.add(new TecnicoAdministrativo(nome, chefe, habilitacaoChefe, funcao));
+            if(habilitacaoChefe) {
+                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, habilitacaoChefe, new Chefe());
+            } else {
+                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, habilitacaoChefe, new Subordinado());
+            }
+            
+            tecAdm.chefesIDs.add(chefeComboBox.getSelectedIndex());
+            
+            if(habilitacaoChefe) {
+                chefes.add(nome);
+                tecAdm.setIdDeChefe(chefes.size());
+
+                atualizarComboBoxes();
+            }
+            
+            funcionarios.add(tecAdm);
+            
+            int verificarID = chefeID;
+            while(true) {
+                for(int i = 0; i < funcionarios.size(); i++) {
+                    if(funcionarios.get(i).isHabilitacaoChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
+                        idDoChefeDoChefe = funcionarios.get(i).getChefeID();
+                    }
+                }
+                
+                if(!(tecAdm.chefesIDs.contains(idDoChefeDoChefe))) {
+                    tecAdm.chefesIDs.add(idDoChefeDoChefe);
+                }
+                 
+                verificarID = idDoChefeDoChefe;
+                
+                if(idDoChefeDoChefe == 0) {    
+                    break;
+                } 
+            }
+            
+            
+            System.out.println("aaaaaaa: " + tecAdm.chefesIDs);
+            atualizarComboBoxes();
         }
         
         if(profRadio.isSelected()) {
-            funcao = profRadio.getText();
+            Professor prof;
             
-            professores.add(new Professor(nome, chefe, habilitacaoChefe, funcao));
-        }
-        
-        if(habilitacaoChefe) {
-            chefes.add(nome);
-            chefeComboBox.addItem(nome);
-        }
-        
-        nomeComboBox.addItem(nome);
+            if(habilitacaoChefe) {
+                prof = new Professor(id, nome, chefeID, habilitacaoChefe, new Chefe());
+            } else {
+                prof = new Professor(id, nome, chefeID, habilitacaoChefe, new Subordinado());
+            }
+            
+            prof.chefesIDs.add(chefeComboBox.getSelectedIndex());
+            
+            if(habilitacaoChefe) {
+                chefes.add(nome);
+                prof.setIdDeChefe(chefes.size());
 
+                atualizarComboBoxes();
+            }
+            
+            funcionarios.add(prof);
+            
+            int verificarID = chefeID;
+            while(true) {
+                for(int i = 0; i < funcionarios.size(); i++) {
+                    if(funcionarios.get(i).isHabilitacaoChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
+                        idDoChefeDoChefe = funcionarios.get(i).getChefeID();
+                    }
+                }
+                
+                if(!(prof.chefesIDs.contains(idDoChefeDoChefe))) {
+                    prof.chefesIDs.add(idDoChefeDoChefe);
+                }
+                 
+                verificarID = idDoChefeDoChefe;
+                
+                if(idDoChefeDoChefe == 0) {    
+                    break;
+                } 
+            }
+            
+            atualizarComboBoxes();
+        }
         
-        System.out.println(tecAdms.toString());
-        System.out.println(professores.toString());
         
+        System.out.println(funcionarios.toString());
     }//GEN-LAST:event_cadastroButtonActionPerformed
+
+    private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
+        int index = nomeComboBox.getSelectedIndex();  
+    }//GEN-LAST:event_consultarButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -274,10 +361,10 @@ public class Controle extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cadastroButton;
     private javax.swing.JComboBox<String> chefeComboBox;
+    private javax.swing.JButton consultarButton;
     private javax.swing.JTextField funcTextField;
     private javax.swing.JComboBox<String> habComboBox;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -289,9 +376,9 @@ public class Controle extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> nomeComboBox;
     private javax.swing.JRadioButton profRadio;
     private javax.swing.JRadioButton tecAdmRadio;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }
