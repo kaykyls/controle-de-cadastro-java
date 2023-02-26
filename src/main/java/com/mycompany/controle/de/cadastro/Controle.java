@@ -34,7 +34,7 @@ public class Controle extends javax.swing.JFrame {
         consultarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        buscarComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,16 +77,19 @@ public class Controle extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastroButton)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(tecAdmRadio)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                            .addComponent(profRadio))
-                        .addComponent(funcTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(chefeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(habComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(388, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cadastroButton)
+                        .addContainerGap(559, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tecAdmRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addComponent(profRadio))
+                            .addComponent(funcTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chefeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(habComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,11 +98,11 @@ public class Controle extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(chefeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addGap(136, 136, 136)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(funcTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(40, 40, 40)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -111,7 +114,7 @@ public class Controle extends javax.swing.JFrame {
                     .addComponent(habComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
                 .addComponent(cadastroButton)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entrada de Funcionário Público", jPanel1);
@@ -133,7 +136,7 @@ public class Controle extends javax.swing.JFrame {
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chefes", "Subordinados" }));
+        buscarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chefes", "Subordinados" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -152,7 +155,7 @@ public class Controle extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nomeComboBox, 0, 213, Short.MAX_VALUE)
                             .addComponent(consultarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(buscarComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(392, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -165,14 +168,14 @@ public class Controle extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscarComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(109, 109, 109)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(consultarButton))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Relatórios", jPanel2);
@@ -191,11 +194,8 @@ public class Controle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ArrayList<String> chefes = new ArrayList<String>();
-    ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-    
-    ArrayList<Professor> professores = new ArrayList<Professor>();
-    ArrayList<TecnicoAdministrativo> tecAdms = new ArrayList<TecnicoAdministrativo>();
+    ArrayList<String> chefes = new ArrayList<>();
+    ArrayList<Funcionario> funcionarios = new ArrayList<>();
   
     public void atualizarComboBoxes() {
         chefeComboBox.removeAllItems();
@@ -269,9 +269,7 @@ public class Controle extends javax.swing.JFrame {
                     break;
                 } 
             }
-            
-            
-            System.out.println("aaaaaaa: " + tecAdm.chefesIDs);
+
             atualizarComboBoxes();
         }
         
@@ -316,13 +314,33 @@ public class Controle extends javax.swing.JFrame {
             
             atualizarComboBoxes();
         }
-        
-        
-        System.out.println(funcionarios.toString());
     }//GEN-LAST:event_cadastroButtonActionPerformed
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        int index = nomeComboBox.getSelectedIndex();  
+        int index = nomeComboBox.getSelectedIndex();
+        textArea.setText("");
+        
+        if(buscarComboBox.getSelectedIndex() == 0) {
+            //vai fazer um loop no tamanho da quantidade de chefes de index
+            for(int i = 0; i < funcionarios.get(index).chefesIDs.size(); i++) {
+                //vai fazer um loop em todos os funcionarios
+                for(int j = 0; j < funcionarios.size(); j++) {
+                    if(funcionarios.get(j).idDeChefe == funcionarios.get(index).chefesIDs.get(i) && funcionarios.get(j).isHabilitacaoChefe()) {
+                        textArea.setText(textArea.getText() + funcionarios.get(j).nome + "\n");
+                    }
+                }
+            } 
+        }
+        
+        if(buscarComboBox.getSelectedIndex() == 1) {
+            //fazer um loop em funcionarios e obter o chefe
+            for(int j = 0; j < funcionarios.size(); j++) {
+                //verficiar se o funcionario tem um chefe com o id de chefe do funcionario index
+                if(funcionarios.get(j).chefesIDs.contains(funcionarios.get(index).idDeChefe) && funcionarios.get(index).isHabilitacaoChefe()) {
+                    textArea.setText(textArea.getText() + funcionarios.get(j).nome + "\n");
+                }
+            }
+        }
     }//GEN-LAST:event_consultarButtonActionPerformed
 
     public static void main(String args[]) {
@@ -358,13 +376,13 @@ public class Controle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> buscarComboBox;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cadastroButton;
     private javax.swing.JComboBox<String> chefeComboBox;
     private javax.swing.JButton consultarButton;
     private javax.swing.JTextField funcTextField;
     private javax.swing.JComboBox<String> habComboBox;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

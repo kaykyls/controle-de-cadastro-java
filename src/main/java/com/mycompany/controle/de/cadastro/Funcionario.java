@@ -20,8 +20,6 @@ abstract public class Funcionario {
         this.chefeID = chefeID;
         this.habilitacaoChefe = habilitacaoChefe;
         this.funcao = funcao;
-        
-        
     }
 
     public int getId() {
