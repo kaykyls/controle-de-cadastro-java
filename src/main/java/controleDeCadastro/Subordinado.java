@@ -1,8 +1,8 @@
-package com.mycompany.controle.de.cadastro;
+package controleDeCadastro;
 
 public class Subordinado implements Habilitacao{
-//    @Override
-//    public boolean isChefe() {
-//        return true;
-//    }
+    @Override
+    public boolean isChefe() {
+        return false;
+    }
 }

@@ -1,24 +1,21 @@
-package com.mycompany.controle.de.cadastro;
+package controleDeCadastro;
 import java.util.ArrayList;
 
 abstract public class Funcionario {
-    int id;
-    String nome;
-    int chefeID;
-    boolean habilitacaoChefe;
-    Habilitacao funcao;
+    private int id;
+    private String nome;
+    private int chefeID;
+    private Habilitacao funcao;
     
-    int idDeChefe;
+    private int idDeChefe;
     
     ArrayList<String> subordinados = new ArrayList<String>();
     ArrayList<Integer> chefesIDs = new ArrayList<Integer>();
 
-    
-    public Funcionario(int id, String nome, int chefeID, boolean habilitacaoChefe, Habilitacao funcao) {
+    public Funcionario(int id, String nome, int chefeID, Habilitacao funcao) {
         this.id = id;
         this.nome = nome;
         this.chefeID = chefeID;
-        this.habilitacaoChefe = habilitacaoChefe;
         this.funcao = funcao;
     }
 
@@ -44,14 +41,6 @@ abstract public class Funcionario {
 
     public void setChefeID(int chefeID) {
         this.chefeID = chefeID;
-    }
-
-    public boolean isHabilitacaoChefe() {
-        return habilitacaoChefe;
-    }
-
-    public void setHabilitacaoChefe(boolean habilitacaoChefe) {
-        this.habilitacaoChefe = habilitacaoChefe;
     }
 
     public Habilitacao getFuncao() {
@@ -88,6 +77,6 @@ abstract public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "id=" + id + ", nome=" + nome + ", chefeID=" + chefeID + ", habilitacaoChefe=" + habilitacaoChefe + ", funcao=" + funcao + ", idDeChefe=" + idDeChefe + ", subordinados=" + subordinados + ", chefesIDs=" + chefesIDs + '}';
-    }   
+        return "Funcionario{" + "id=" + id + ", nome=" + nome + ", chefeID=" + chefeID + ", funcao=" + funcao + ", idDeChefe=" + idDeChefe + ", subordinados=" + subordinados + ", chefesIDs=" + chefesIDs + '}';
+    }
 }

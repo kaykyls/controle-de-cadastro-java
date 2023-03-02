@@ -1,11 +1,12 @@
-package com.mycompany.controle.de.cadastro;
+package controleDeCadastro;
 
 import java.util.ArrayList;
 
 public class Controle extends javax.swing.JFrame {
     public Controle() {
         initComponents();
-        funcionarios.add(new TecnicoAdministrativo(0, "Jener de Souza Novais", 0, true, new Chefe()));
+        textArea.setEditable(false);
+        funcionarios.add(new TecnicoAdministrativo(0, "Jener de Souza Novais", 0, new Chefe()));
     }
 
     @SuppressWarnings("unchecked")
@@ -225,7 +226,7 @@ public class Controle extends javax.swing.JFrame {
         
         nomeComboBox.removeAllItems();
         for(int i = 0; i < funcionarios.size(); i++) {
-            nomeComboBox.addItem(funcionarios.get(i).nome);
+            nomeComboBox.addItem(funcionarios.get(i).getNome());
         }
     }
     
@@ -241,10 +242,13 @@ public class Controle extends javax.swing.JFrame {
         } else {
             habilitacaoChefe = false;
         }
-        
-        if(funcTextField.getText() == ""){
+
+        if(nome.equals("")){
+            System.out.println("ENTROU");
             return;
         }
+        
+        funcTextField.setText("");
         
         if(!(tecAdmRadio.isSelected() || profRadio.isSelected())) {
             return;
@@ -254,9 +258,9 @@ public class Controle extends javax.swing.JFrame {
             TecnicoAdministrativo tecAdm;
             
             if(habilitacaoChefe) {
-                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, habilitacaoChefe, new Chefe());
+                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, new Chefe());
             } else {
-                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, habilitacaoChefe, new Subordinado());
+                tecAdm = new TecnicoAdministrativo(id, nome, chefeID, new Subordinado());
             }
             
             tecAdm.chefesIDs.add(chefeComboBox.getSelectedIndex());
@@ -272,8 +276,10 @@ public class Controle extends javax.swing.JFrame {
             
             int verificarID = chefeID;
             while(true) {
+                //vai fazer um loop em todos os funcionarios
                 for(int i = 0; i < funcionarios.size(); i++) {
-                    if(funcionarios.get(i).isHabilitacaoChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
+                    //se o funcionario for chefe e o id de chefe dele for
+                    if(funcionarios.get(i).getFuncao().isChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
                         idDoChefeDoChefe = funcionarios.get(i).getChefeID();
                     }
                 }
@@ -293,12 +299,12 @@ public class Controle extends javax.swing.JFrame {
         }
         
         if(profRadio.isSelected()) {
-            Professor prof;
-            
+            Professor prof;           
+
             if(habilitacaoChefe) {
-                prof = new Professor(id, nome, chefeID, habilitacaoChefe, new Chefe());
+                prof = new Professor(id, nome, chefeID, new Chefe());
             } else {
-                prof = new Professor(id, nome, chefeID, habilitacaoChefe, new Subordinado());
+                prof = new Professor(id, nome, chefeID, new Subordinado());
             }
             
             prof.chefesIDs.add(chefeComboBox.getSelectedIndex());
@@ -309,13 +315,13 @@ public class Controle extends javax.swing.JFrame {
 
                 atualizarComboBoxes();
             }
-            
+
             funcionarios.add(prof);
             
             int verificarID = chefeID;
             while(true) {
                 for(int i = 0; i < funcionarios.size(); i++) {
-                    if(funcionarios.get(i).isHabilitacaoChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
+                    if(funcionarios.get(i).getFuncao().isChefe() && funcionarios.get(i).getIdDeChefe() == verificarID){
                         idDoChefeDoChefe = funcionarios.get(i).getChefeID();
                     }
                 }
@@ -338,14 +344,16 @@ public class Controle extends javax.swing.JFrame {
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
         int index = nomeComboBox.getSelectedIndex();
         textArea.setText("");
+        System.out.println(funcionarios);
         
         if(buscarComboBox.getSelectedIndex() == 0) {
             //vai fazer um loop no tamanho da quantidade de chefes de index
-            for(int i = 0; i < funcionarios.get(index).chefesIDs.size(); i++) {
+            for(int i = funcionarios.get(index).chefesIDs.size() - 1; i >= 0; i--) {
                 //vai fazer um loop em todos os funcionarios
                 for(int j = 0; j < funcionarios.size(); j++) {
-                    if(funcionarios.get(j).idDeChefe == funcionarios.get(index).chefesIDs.get(i) && funcionarios.get(j).isHabilitacaoChefe()) {
-                        textArea.setText(textArea.getText() + funcionarios.get(j).nome + "\n");
+                    //se um funcionario tem o id de chefe corresepondente ao inésimo chefe do array de chefes do funcionario que foi selecionado no index
+                    if(funcionarios.get(j).getIdDeChefe() == funcionarios.get(index).chefesIDs.get(i) && funcionarios.get(j).getFuncao().isChefe()) {
+                        textArea.setText(textArea.getText() + funcionarios.get(j).getNome() + "\n");
                     }
                 }
             } 
@@ -353,10 +361,10 @@ public class Controle extends javax.swing.JFrame {
         
         if(buscarComboBox.getSelectedIndex() == 1) {
             //fazer um loop em funcionarios e obter o chefe
-            for(int j = 0; j < funcionarios.size(); j++) {
+            for(int i = 0; i < funcionarios.size(); i++) {
                 //verficiar se o funcionario tem um chefe com o id de chefe do funcionario index
-                if(funcionarios.get(j).chefesIDs.contains(funcionarios.get(index).idDeChefe) && funcionarios.get(index).isHabilitacaoChefe()) {
-                    textArea.setText(textArea.getText() + funcionarios.get(j).nome + "\n");
+                if(funcionarios.get(i).chefesIDs.contains(funcionarios.get(index).getIdDeChefe()) && funcionarios.get(index).getFuncao().isChefe()) {
+                    textArea.setText(textArea.getText() + funcionarios.get(i).getNome() + "\n");
                 }
             }
         }

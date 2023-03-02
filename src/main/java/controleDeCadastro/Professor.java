@@ -1,7 +1,7 @@
-package com.mycompany.controle.de.cadastro;
+package controleDeCadastro;
 
 public class Professor extends Funcionario {
-    public Professor(int id, String nome, int chefeID, boolean habilitacaoChefe, Habilitacao funcao) {
-        super(id, nome, chefeID, habilitacaoChefe, funcao);
-    }
+    public Professor(int id, String nome, int chefeID, Habilitacao funcao) {
+        super(id, nome, chefeID, funcao);
+    }  
 }

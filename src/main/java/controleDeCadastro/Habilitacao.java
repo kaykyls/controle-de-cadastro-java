@@ -1,5 +1,5 @@
-package com.mycompany.controle.de.cadastro;
+package controleDeCadastro;
 
 public interface Habilitacao {
-//    boolean isChefe();
+    boolean isChefe();
 }
