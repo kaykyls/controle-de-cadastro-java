@@ -1,3 +1,5 @@
+<h1>Controle de cadastro</h1>
+
 <img source="https://cdn.discordapp.com/attachments/766798638139179031/1081993109501644831/cadastroGif.gif"/>
 
 <p>Nessa atividade deve ser desenvolvido um programa que
