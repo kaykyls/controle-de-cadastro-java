@@ -20,3 +20,13 @@ todos os outros são chefes.</p>
 
 <p>Na tela de relatórios deve ser possível mostrar os subordinados e os chefes de
 uma determinada pessoa escolhida.</p>
+
+<p>O sistema deve ser feito orientado a objeto. Deve conter uma Classe abstrata
+funcionário e os tipos concretos Professor e Técnico Administrativo. Um
+funcionário pode ter habilitação de Chefe ou ser apenas um Subordinado. A
+classe funcionário deve ter um método abstrato que retorna a lista de
+subordinados e a lista de chefes. Aqui temos a ideia de herança múltipla que
+deve ser implementada através de Interfaces. Chefe e Subordinado são
+classes que implementam Habilitação. E a classe Funcionário é abstrata e tem
+um atributo função do tipo Habilitação, que deve ser ou Subordinado ou
+Chefe.</p>
